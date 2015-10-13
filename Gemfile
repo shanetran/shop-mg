@@ -16,3 +16,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
 gem 'devise'
 gem 'rails_12factor', group: :production
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem "spreadsheet", "0.9.0"
+
+

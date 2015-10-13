@@ -1,0 +1,7 @@
+<% flash.each do |key, value| %>
+<script>
+	$(function() {
+    	$.notify("<%= value %>", "<%= flash_class(key) %>");
+	}); 
+</script>
+<% end %>
