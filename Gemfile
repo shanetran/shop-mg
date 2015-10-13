@@ -15,4 +15,4 @@ end
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
 gem 'devise'
-
+gem 'rails_12factor', group: :production
