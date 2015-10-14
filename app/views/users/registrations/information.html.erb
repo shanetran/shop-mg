@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h3> Sign up </h3>
+				<%= form_for(:users, url: informations_path) do |f| %>
+
+				<div class="form-group">
+					<label for="">Email:</label>
+					<%= f.email_field :email, autofocus: true, class: "form-control", value: current_user.email, readonly: true %>
+				</div>
+
+				<div class="form-group">
+					<label for="">Full Name:</label>
+					<%= f.text_field :name, autofocus: true, class: "form-control", value: current_user.name %>
+				</div>
+				<div class="form-group">
+					<label for="">Birth Day:</label>
+					<div class="input-append date">
+						<input type="text" name="user[birthday]" class="birthday-picker form-control" value="<%= current_user.birthday %>">
+						<span class="add-on"><i class="icon-th"></i></span>
+					</div>
+					<script>
+						$(function() {
+							$('.birthday-picker').datepicker({
+								format : "yyyy-mm-dd"
+							})
+						});
+					</script>
+				</div>
+				<div class="form-group">
+					<label for="">Gender:</label>
+					<%= f.select :gender, options_for_select([["Male",true],["Female",false]], selected: current_user.gender),{selected: current_user.gender}, {class: "selectpicker show-tick form-control"} %>
+				</div>
+				<div class="form-group">
+					<label for="">Address:</label>
+					<%= f.text_area :address, autofocus: true, class: "form-control", value: current_user.address %>
+				</div>
+				<div class="form-group">
+					<label for="">Phone:</label>
+					<%= f.text_field :phone, autofocus: true, class: "form-control", value: current_user.phone %>
+				</div>
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Processing">
+						Save
+					</button>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

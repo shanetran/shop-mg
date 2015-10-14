@@ -42,8 +42,8 @@ brand_list = [
   [14, "Acer", 3 ],
   [15, "Lenovo", 3 ]
 ]
-brand_list.each do |name, cate_id|
-  Brand.create( name: name, category_id: cate_id )
+brand_list.each do |id, name, cate_id|
+  Brand.create(id: id, name: name, category_id: cate_id )
 end
 puts "------Create Brand Complete--------"
 
@@ -59,8 +59,9 @@ bookSheet.each do |row|
     :name => row[1],
     :stock => row[2],
     :price => row[3],
-    :brand_id => row[4],
-    :description => row[5] 
+    :sale_price => row[4],
+    :brand_id => row[5],
+    :description => row[6] 
   }
   products.push(item)
 end

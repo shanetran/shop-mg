@@ -1,0 +1,214 @@
+<div class="product-big-title-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="product-bit-title text-center">
+					<h2>Shop</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="single-product-area">
+	<div class="zigzag-bottom"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="single-sidebar">
+					<h2 class="sidebar-title">Search Products</h2>
+					<form action="">
+						<input type="text" placeholder="Search products...">
+						<input type="submit" value="Search">
+					</form>
+				</div>
+
+				<div class="single-sidebar">
+					<h2 class="sidebar-title">Top Sellers</h2>
+					<% @top_sell.each do |product| %>
+						<div class="thubmnail-recent" style="position: relative">
+							<img src="/assets/product-thumb-1.jpg" class="recent-thumb" alt="">
+							<% if product.sale_price && product.sale_price > 0 %>
+								<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+								<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+									<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
+								</span>
+							<% end %>
+							<h2><%= link_to product.name, product_path(product) %></h2>
+							<div class="product-sidebar-price">
+								<% if product.sale_price && product.sale_price > 0 %>
+									<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+								<% else %>
+									<ins><%= number_to_currency(product.price)%></ins>
+								<% end %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+
+				<div class="single-sidebar">
+					<h2 class="sidebar-title">Top New</h2>
+					<% @top_new.each do |product| %>
+						<div class="thubmnail-recent" style="position: relative">
+							<img src="/assets/product-thumb-1.jpg" class="recent-thumb" alt="">
+							<% if product.sale_price && product.sale_price > 0 %>
+								<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+								<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+									<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
+								</span>
+							<% end %>
+							<h2><%= link_to product.name, product_path(product) %></h2>
+							<div class="product-sidebar-price">
+								<% if product.sale_price && product.sale_price > 0 %>
+									<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+								<% else %>
+									<ins><%= number_to_currency(product.price)%></ins>
+								<% end %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="col-md-8">
+				<div class="product-content-right">
+					<div class="product-breadcroumb">
+						<a href="">Home</a>
+						<a href="">Category Name</a>
+						<a href="">Sony Smart TV - 2015</a>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="product-images">
+								<div class="product-main-img">
+									<img src="/assets/product-2.jpg" alt="">
+								</div>
+
+								<div class="product-gallery">
+									<img src="/assets/product-thumb-1.jpg" alt="">
+									<img src="/assets/product-thumb-2.jpg" alt="">
+									<img src="/assets/product-thumb-3.jpg" alt="">
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="product-inner">
+								<h2 class="product-name"><%= @product.name %></h2>
+								<div class="product-inner-price" style="position: relative">
+									<% if @product.sale_price && @product.sale_price > 0 %>
+										<ins><%= number_to_currency(@product.sale_price)%></ins><del><%= number_to_currency(@product.price)%></del>
+										<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+										<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+											<%= number_to_percentage((100 - ((@product.sale_price * 100) / @product.price)).to_i, precision: 0)%>
+										</span>	
+									<% else %>
+										<ins><%= number_to_currency(@product.price)%></ins>
+									<% end %>
+								</div>
+
+								<form action="" class="cart">
+									<div class="quantity">
+										<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+									</div>
+									<button class="add_to_cart_button" type="submit">
+										Add to cart
+									</button>
+								</form>
+
+
+								<div role="tabpanel">
+									<ul class="product-tab" role="tablist">
+										<li role="presentation" class="active">
+											<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a>
+										</li>
+										<li role="presentation">
+											<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane fade in active" id="home">
+											<h2>Product Description</h2>
+											<p>
+												<%= @product.description %>
+											</p>
+											
+										</div>
+										<div role="tabpanel" class="tab-pane fade" id="profile">
+											<h2>Reviews</h2>
+											<div class="submit-review">
+												<p>
+													<label for="name">Name</label>
+													<input name="name" type="text">
+												</p>
+												<p>
+													<label for="email">Email</label>
+													<input name="email" type="email">
+												</p>
+												<div class="rating-chooser">
+													<p>
+														Your rating
+													</p>
+
+													<div class="rating-wrap-post">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+													</div>
+												</div>
+												<p>
+													<label for="review">Your review</label>													<textarea name="review" id="" cols="30" rows="10"></textarea>
+</p>												<p>
+													<input type="submit" value="Submit">
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="related-products-wrapper">
+						<h2 class="related-products-title">Related Products</h2>
+						<div class="related-products-carousel">
+							<% @related_product.each do |product|%>
+							<div class="single-product">
+								<div class="product-f-image">
+									<img src="/assets/product-1.jpg" alt="">
+									<% if product.sale_price && product.sale_price > 0 %>
+										<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+										<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+											<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
+										</span>
+									<% end %>	
+									<div class="product-hover">
+										<a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+										<%= link_to product_path(product), class: "view-details-link" do %>
+											<i class="fa fa-link"></i> See details
+										<% end %>
+									</div>
+								</div>
+
+								<h2><%= link_to product.name, product_path(product) %></h2>
+
+								<div class="product-carousel-price">
+									<% if product.sale_price && product.sale_price > 0 %>
+										<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+									<% else %>
+										<ins><%= number_to_currency(product.price)%></ins>
+									<% end %>
+								</div>
+							</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
