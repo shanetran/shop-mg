@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'carts/index'
+
   root to: 'home#index'
   devise_for :users, controllers: {
         sessions: 'users/sessions',
@@ -10,6 +12,21 @@ Rails.application.routes.draw do
     post '/informations', to: 'users/registrations#informations', as: 'informations'
   end
   
-  resources :products
+  resources :products do
+    collection do
+      get "top_sell"
+      get "top_new"
+    end
+    member do
+      get "related"
+    end
+  end
+  
+  resources :carts do
+    member do
+      post "add"
+      delete "remove"
+    end
+  end
   
 end

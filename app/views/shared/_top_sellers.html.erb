@@ -1,0 +1,20 @@
+<div class="single-sidebar">
+	<h2 class="sidebar-title"><a href="/products/top_sell">Top Sellers</a></h2>
+	<% @top_sell.each do |product| %>
+	<div class="thubmnail-recent" style="position: relative">
+		<img src="/assets/product-thumb-1.jpg" class="recent-thumb" alt="">
+		<% if product.sale_price && product.sale_price > 0 %>
+		<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+		<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;"> <%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%> </span>
+		<% end %>
+		<h2><%= link_to product.name, product_path(product) %></h2>
+		<div class="product-sidebar-price">
+			<% if product.sale_price && product.sale_price > 0 %>
+			<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+			<% else %>
+			<ins><%= number_to_currency(product.price)%></ins>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+</div>

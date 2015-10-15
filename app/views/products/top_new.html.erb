@@ -3,15 +3,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="product-bit-title text-center">
-					<h2>List All Product</h2>
+					<h2>Top New Product</h2>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<% if @products.size  > 0%>
+<% if @products.size  > 0  %>
 	<%= render partial: "shared/products", locals: {products: @products}%>
 <% else %>
 	<h3>Product not found !!!</h3>
 <% end %>
+

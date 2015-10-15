@@ -151,7 +151,7 @@
 			<div class="col-md-4">
 				<div class="single-product-widget">
 					<h2 class="product-wid-title">Top Sellers</h2>
-					<a href="" class="wid-view-more">View All</a>
+					<a href="/products/top_sell" class="wid-view-more">View All</a>
 					<% @top_sell.each do |product|%>
 					<div class="single-wid-product" style="position: relative">
 						<%= link_to product_path(product) do %>
@@ -185,41 +185,43 @@
 			<div class="col-md-4">
 				<div class="single-product-widget">
 					<h2 class="product-wid-title">Recently Viewed</h2>
+					<% if session[:recently_viewed] %>
 					<a href="#" class="wid-view-more">View All</a>
-					<% @recently_viewed.each do |product|%>
-						<div class="single-wid-product" style="position: relative">
-							<%= link_to product_path(product) do %>
-								<img src="/assets/product-thumb-1.jpg" alt="" class="product-thumb">
-								<% if product.sale_price && product.sale_price > 0 %>
-									<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
-									<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
-										<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
-									</span>
+						<% @recently_viewed.each do |product|%>
+							<div class="single-wid-product" style="position: relative">
+								<%= link_to product_path(product) do %>
+									<img src="/assets/product-thumb-1.jpg" alt="" class="product-thumb">
+									<% if product.sale_price && product.sale_price > 0 %>
+										<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+										<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+											<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
+										</span>
+									<% end %>
 								<% end %>
-							<% end %>
-							<h2><%= link_to product.name, product_path(product) %></h2>
-							<div class="product-wid-rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+								<h2><%= link_to product.name, product_path(product) %></h2>
+								<div class="product-wid-rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="product-wid-price">
+									<% if product.sale_price && product.sale_price > 0 %>
+										<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+									<% else %>
+										<ins><%= number_to_currency(product.price)%></ins>
+									<% end %>	
+								</div>
 							</div>
-							<div class="product-wid-price">
-								<% if product.sale_price && product.sale_price > 0 %>
-									<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
-								<% else %>
-									<ins><%= number_to_currency(product.price)%></ins>
-								<% end %>	
-							</div>
-						</div>
+						<% end %>
 					<% end %>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="single-product-widget">
 					<h2 class="product-wid-title">Top New</h2>
-					<a href="#" class="wid-view-more">View All</a>
+					<a href="/products/top_new" class="wid-view-more">View All</a>
 					<% @top_new.each do |product|%>
 					<div class="single-wid-product" style="position: relative">
 						<%= link_to product_path(product) do %>

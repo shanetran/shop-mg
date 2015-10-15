@@ -13,6 +13,7 @@ class Product
   field :sale_price, type: Float
   field :view, type: Integer
   field :rate, type: Float
+  field :created_at, type: DateTime, default: Time.now
 
   belongs_to :brand
   belongs_to :order_detail

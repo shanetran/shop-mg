@@ -1,0 +1,153 @@
+<% item = 0 %>
+<div class="product-big-title-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="product-bit-title text-center">
+					<h2>Shopping Cart</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Page title area -->
+<div class="single-product-area">
+	<div class="zigzag-bottom"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<%= render "shared/search" %>
+				<%= render "shared/top_sellers" %>
+				<%= render "shared/top_new" %>
+			</div>
+
+			<div class="col-md-8">
+				<div class="product-content-right">
+					<div class="woocommerce">
+						<% if @carts %>
+							<form method="post" action="#">
+								<table cellspacing="0" class="shop_table cart">
+									<thead>
+										<tr>
+											<th class="product-remove">&nbsp;</th>
+											<th class="product-thumbnail">&nbsp;</th>
+											<th class="product-name">Product</th>
+											<th class="product-price">Price</th>
+											<th class="product-quantity">Quantity</th>
+											<th class="product-subtotal">Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @carts.each do |id, quantity| %>
+											<% product =  Product.find_by(id: id) %>
+											<tr class="cart_item">
+												<td class="product-remove">
+													<%= link_to "×", remove_cart_path(product), method: :delete, class: "remove"%>
+												</td>
+												<td class="product-thumbnail">
+													<%= link_to product_path(product) do %>
+														<img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="/assets/product-thumb-2.jpg">
+													<% end %>
+												</td>
+												<td class="product-name">
+													<%= link_to product.name, product_path(product) %>
+												</td>
+												<td class="product-price">
+													<span class="amount">
+														<% if product.sale_price && product.sale_price > 0 %>
+															<ins style="font-weight: 600; color: #5a88ca;"><%= number_to_currency(product.sale_price)%></ins> 
+															<del><%= number_to_currency(product.price)%></del>
+														<% else %>
+															<ins style="font-weight: 600; color: #5a88ca;"><%= number_to_currency(product.price)%></ins>
+														<% end %>
+													</span>
+												</td>
+												<td class="product-quantity">
+													<div class="quantity buttons_added">
+														<input type="number" size="4" class="input-text qty text" title="Qty" value="<%= quantity %>" min="0" step="1">
+													</div>
+												</td>
+												<td class="product-subtotal">
+													<span class="amount">
+														<% if product.sale_price && product.sale_price > 0 %>
+															<%= number_to_currency(product.sale_price * quantity) %>
+															<% item += product.sale_price * quantity %>
+														<% else %>
+															<%= number_to_currency(product.price * quantity) %>
+															<% item += product.price * quantity %>
+														<% end %>
+													</span>
+												</td>
+											</tr>
+										<% end %>
+										<tr>
+											<td class="actions" colspan="6" style="text-align: right">
+												<input type="submit" value="Update Cart" name="update_cart" class="button">
+												<input type="submit" value="Checkout" name="proceed" class="checkout-button button alt wc-forward">
+											</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						<% else %>
+							<div style="margin-bottom: 50px">
+								<h3>No item in cart</h3>
+								<%= link_to "Go to shop", root_path, class: "btn btn-primary"%>
+							</div>
+						<% end %>
+						<div class="cart-collaterals">
+
+							<div class="cross-sells">
+								<h2>You may be interested in...</h2>
+								<ul class="products">
+									<% @interested.each do |product| %>
+										<li class="product" style="text-align: center">
+											<%= link_to product_path(product) do %>
+												<img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="/assets/product-2.jpg">
+												 <% if product.sale_price && product.sale_price > 0 %>
+													<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
+													<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
+														<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
+													</span>
+												<% end %>
+												 <h3><%= product.name %></h3>
+												  <span class="price">
+												  	<span class="amount">
+												  		<% if product.sale_price && product.sale_price > 0 %>
+															<ins><%= number_to_currency(product.sale_price)%></ins> <del><%= number_to_currency(product.price)%></del>
+														<% else %>
+															<ins><%= number_to_currency(product.price)%></ins>
+														<% end %>
+													</span>
+												  </span>
+												<%= link_to product_path(product), class: "add_to_cart_button" do %>
+													Select options
+												<% end %>
+											<% end %>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+
+						<% if @carts %>
+							<div class="cart_totals ">
+								<h2>Cart Totals</h2>
+
+								<table cellspacing="0">
+									<tbody>
+										<tr class="order-total">
+											<th>Order Total</th>
+											<td><strong><span class="amount"><%= number_to_currency(item) %></span></strong></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

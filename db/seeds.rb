@@ -61,7 +61,8 @@ bookSheet.each do |row|
     :price => row[3],
     :sale_price => row[4],
     :brand_id => row[5],
-    :description => row[6] 
+    :created_at => row[6],
+    :description => row[7]
   }
   products.push(item)
 end

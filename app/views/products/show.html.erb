@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="product-bit-title text-center">
-					<h2>Shop</h2>
+					<h2><%= @product.name %></h2>
 				</div>
 			</div>
 		</div>
@@ -15,59 +15,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div class="single-sidebar">
-					<h2 class="sidebar-title">Search Products</h2>
-					<form action="">
-						<input type="text" placeholder="Search products...">
-						<input type="submit" value="Search">
-					</form>
-				</div>
+				<%= render "shared/search" %>
 
-				<div class="single-sidebar">
-					<h2 class="sidebar-title">Top Sellers</h2>
-					<% @top_sell.each do |product| %>
-						<div class="thubmnail-recent" style="position: relative">
-							<img src="/assets/product-thumb-1.jpg" class="recent-thumb" alt="">
-							<% if product.sale_price && product.sale_price > 0 %>
-								<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
-								<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
-									<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
-								</span>
-							<% end %>
-							<h2><%= link_to product.name, product_path(product) %></h2>
-							<div class="product-sidebar-price">
-								<% if product.sale_price && product.sale_price > 0 %>
-									<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
-								<% else %>
-									<ins><%= number_to_currency(product.price)%></ins>
-								<% end %>
-							</div>
-						</div>
-					<% end %>
-				</div>
+				<%= render "shared/top_sellers" %>
 
-				<div class="single-sidebar">
-					<h2 class="sidebar-title">Top New</h2>
-					<% @top_new.each do |product| %>
-						<div class="thubmnail-recent" style="position: relative">
-							<img src="/assets/product-thumb-1.jpg" class="recent-thumb" alt="">
-							<% if product.sale_price && product.sale_price > 0 %>
-								<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 0; top: 1px">
-								<span style="position: absolute; right: 7px; top: 10px; color: #fff; font-weight: 600;">
-									<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
-								</span>
-							<% end %>
-							<h2><%= link_to product.name, product_path(product) %></h2>
-							<div class="product-sidebar-price">
-								<% if product.sale_price && product.sale_price > 0 %>
-									<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
-								<% else %>
-									<ins><%= number_to_currency(product.price)%></ins>
-								<% end %>
-							</div>
-						</div>
-					<% end %>
-				</div>
+				<%= render "shared/top_new" %>
+				
 			</div>
 
 			<div class="col-md-8">
@@ -108,14 +61,14 @@
 									<% end %>
 								</div>
 
-								<form action="" class="cart">
+								<%= form_tag add_cart_path(@product), class: "cart" do %>
 									<div class="quantity">
 										<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
 									</div>
 									<button class="add_to_cart_button" type="submit">
 										Add to cart
 									</button>
-								</form>
+								<% end %>
 
 
 								<div role="tabpanel">
@@ -174,7 +127,7 @@
 					</div>
 
 					<div class="related-products-wrapper">
-						<h2 class="related-products-title">Related Products</h2>
+						<h2 class="related-products-title"><a href="/products/<%=@product.id%>/related">Related Products</a></h2>
 						<div class="related-products-carousel">
 							<% @related_product.each do |product|%>
 							<div class="single-product">
