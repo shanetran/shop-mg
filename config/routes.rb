@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  get 'carts/index'
+
+  get 'checkout/index'
 
   root to: 'home#index'
+  get "/search", to: "home#search"
+  resources :categories
+  resources :brands
+  resources :orders
+  resources :checkouts
   devise_for :users, controllers: {
         sessions: 'users/sessions',
         :registrations => "users/registrations"
@@ -26,6 +32,9 @@ Rails.application.routes.draw do
     member do
       post "add"
       delete "remove"
+    end
+    collection do
+      post "updated"
     end
   end
   

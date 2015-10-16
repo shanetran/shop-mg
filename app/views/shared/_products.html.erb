@@ -1,43 +1,39 @@
 <div class="single-product-area">
 	<div class="zigzag-bottom"></div>
-	<div class="container">
-		<div class="row">
-			<% products.each do |product| %>
-			<div class="col-md-3 col-sm-6" style="text-align: center; position: relative">
-				<% if product.sale_price && product.sale_price > 0 %>
-					<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 50px; top: 1px">
-					<span style="position: absolute; right: 57px; top: 10px; color: #fff; font-weight: 600;">
-						<%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%>
-					</span>
-				<% end %>
-				<div class="single-shop-product">
-					<div class="product-upper">
-						<img src="/assets/product-4.jpg" alt="">
-					</div>
-					<h2><%= link_to truncate(product.name, length: 30, separator: ' '), product_path(product) %></h2>
-					<div class="product-carousel-price">
-						<% if product.sale_price && product.sale_price > 0 %>
-							<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
-						<% else %>
-							<ins><%= number_to_currency(product.price)%></ins>
-						<% end %>
-					</div>
+	<div class="row">
+		<% products.each do |product| %>
+		<div class="col-md-3 col-sm-6" style="text-align: center; position: relative">
+			<% if product.sale_price && product.sale_price > 0 %>
+			<img src="/assets/sale.png" alt="" style="width: 42px; position: absolute; right: 50px; top: 1px">
+			<span style="position: absolute; right: 57px; top: 10px; color: #fff; font-weight: 600;"> <%= number_to_percentage((100 - ((product.sale_price * 100) / product.price)).to_i, precision: 0)%> </span>
+			<% end %>
+			<div class="single-shop-product">
+				<div class="product-upper">
+					<img src="/assets/product-4.jpg" alt="">
+				</div>
+				<h2><%= link_to truncate(product.name, length: 30, separator: ' '), product_path(product) %></h2>
+				<div class="product-carousel-price">
+					<% if product.sale_price && product.sale_price > 0 %>
+					<ins><%= number_to_currency(product.sale_price)%></ins><del><%= number_to_currency(product.price)%></del>
+					<% else %>
+					<ins><%= number_to_currency(product.price)%></ins>
+					<% end %>
+				</div>
 
-					<div class="product-option-shop">
-						<a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-					</div>
+				<div class="product-option-shop">
+					<a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
 				</div>
 			</div>
-			<% end %>
 		</div>
+		<% end %>
+	</div>
 
-		<div class="row">
-			<div class="col-md-12">
-				<div class="product-pagination text-center">
-					<nav>
-						<%= paginate products, :window => 2 %>
-					</nav>
-				</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="product-pagination text-center">
+				<nav>
+					<%= paginate products, :window => 2 %>
+				</nav>
 			</div>
 		</div>
 	</div>

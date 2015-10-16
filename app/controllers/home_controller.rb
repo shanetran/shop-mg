@@ -7,4 +7,8 @@ class HomeController < ApplicationController
     @top_sell = Product.where('sale_price' => {'$gt' => 0}).limit(4)
     @top_new = Product.order_by(id: :desc).limit(4)
   end
+
+  def search
+    @products = Product.full_text_search(params[:key], match: :any).page params[:page]
+  end
 end

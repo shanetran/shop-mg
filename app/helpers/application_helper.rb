@@ -24,4 +24,16 @@ module ApplicationHelper
         }.inject(:+)
     end
   end
+  
+  def breadcrumbs(product)
+    name = Product.find_by(id: product)
+    html = ""
+    html += "<div class='product-breadcroumb'>"
+    html += "<a href='/'>Home</a>"
+    html += "<a href='/categories/#{name.brand.category.id}'>#{name.brand.category.name}</a>"
+    html += "<a href='/brands/#{name.brand.id}'>#{name.brand.name}</a>"
+    html += "<a href="">#{name.name}</a>"
+    html += "</div>"
+    html.html_safe
+  end
 end

@@ -20,4 +20,5 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem "spreadsheet", "0.9.0"
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 

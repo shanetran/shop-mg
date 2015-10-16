@@ -47,7 +47,15 @@
 
 			<div class="col-sm-6">
 				<div class="shopping-item">
-					<a href="/carts">Cart - <span class="cart-amunt"><%= number_to_currency(cart_subtotal)%></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><%= cart_item %></span></a>
+					<a href="/carts">
+						Cart - <span class="cart-amunt">
+									<%= number_to_currency(cart_subtotal) ? number_to_currency(cart_subtotal) : "$0" %>
+								</span> 
+								<i class="fa fa-shopping-cart"></i> 
+								<span class="product-count">
+									<%= cart_item ? cart_item : 0 %>
+								</span>
+					</a>
 				</div>
 			</div>
 		</div>

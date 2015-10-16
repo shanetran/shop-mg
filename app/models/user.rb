@@ -25,10 +25,13 @@ class User
   field :last_sign_in_ip,    type: String
   
   field :name
+  field :name1
   field :birthday, type: DateTime
   field :address
+  field :address1
   field :gender, type: Boolean, default: false
   field :phone
+  field :phone1
   field :admin, type: Boolean, default: false
 
   has_many :orders

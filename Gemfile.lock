@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/mauriciozaffari/mongoid_search.git
+  revision: 3e8c92075a7e224782daa406c875fdba0c623f3c
+  branch: master
+  specs:
+    mongoid_search (0.3.2)
+      fast-stemmer (~> 1.0.0)
+      mongoid (>= 3.0.0)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 63ece9973709a837a1817824d202b367db3e3688
   specs:
@@ -75,6 +84,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
+    fast-stemmer (1.0.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -202,6 +212,7 @@ DEPENDENCIES
   kaminari-bootstrap (~> 3.0.1)
   mongoid!
   mongoid-paperclip
+  mongoid_search!
   rails (= 4.2.3)
   rails_12factor
   sass-rails (~> 5.0)

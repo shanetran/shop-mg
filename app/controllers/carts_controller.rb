@@ -15,6 +15,8 @@ class CartsController < ApplicationController
         cart[id] += quantity
       elsif cart[id] && (quantity == 1)
         cart[id] += 1
+      elsif quantity > 1
+        cart[id] = quantity 
       else 
         cart[id] = 1
       end 
@@ -25,6 +27,17 @@ class CartsController < ApplicationController
     end
     
     flash[:success] = "Added cart."
+    redirect_to carts_path
+  end
+  
+  def updated
+    quantity = params[:quantity]
+    cart = session[:cart]
+    quantity.each do |key, value|
+      cart[key] = value.to_i
+    end
+    session[:cart] = cart
+    flash[:success] = "Update cart complete."
     redirect_to carts_path
   end
   
